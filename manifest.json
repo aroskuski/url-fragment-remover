@@ -1,0 +1,27 @@
+{
+
+	"manifest_version": 2,
+	"name": "URL Fragment Remover",
+	"applications": {
+		"gecko": {
+			"id": "url-fragment-remover@aroskuski"
+		}
+	},
+	"version": "1.0",
+
+	"description": "Can remove the fragment portion of a URL without reloading the page",
+
+	"permissions": [
+		"tabs",
+		"activeTab"
+	],
+
+	"page_action": {
+		"default_title": "Remove URL Fragment"
+	},
+
+	"background": {
+		"scripts": ["ui.js"]
+	}
+
+}
