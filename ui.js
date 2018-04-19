@@ -1,6 +1,7 @@
 "use strict";
 
 const DEBUG_MODE = false;
+const DOMAIN_BLACKLIST = ["about:","https://addons.mozilla.org"];
 
 function logInfo(message, tab){
 	if(DEBUG_MODE){
@@ -13,7 +14,17 @@ function logError(message, tab){
 }
 
 function shouldShowPageAction(id, url){
-	return id !== browser.tabs.TAB_ID_NONE && url.indexOf("#") !== -1;
+	return id !== browser.tabs.TAB_ID_NONE && url.indexOf("#") !== -1 && 
+		!isDomainBlacklisted(url);
+}
+
+function isDomainBlacklisted(url){
+	for(let prefix of DOMAIN_BLACKLIST){
+		if(url.startsWith(prefix)){
+			return true;
+		}
+	}
+	return false;
 }
 
 function updatePageActionState(tab){
